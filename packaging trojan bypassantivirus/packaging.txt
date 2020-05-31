@@ -1,0 +1,11 @@
+#converting python script into binary exe (packaging) helps in many scenerio don't require interpretor,and runs double clicking
+#one note its best to create package (exe) from the system for which it is created.ie best to create binary exe for some py script on linux if it is to run on linux
+#package on  os that is same as target sys(to run that exe)
+#package all py file in single exe,executed when double clicked ,no need interpreter to run
+#pyinstaller is the module for packaging py file to binary exe
+#python -m pip install pyinstaller
+#c:/cddc/efc/python.exe -m pip install pyinstaller if location not specified
+
+to convert to exe
+#c:/location/pyinstaller.exe reverse_backdoor.py --onefile --noconsole in cmd
+#now you can see .exe file in same location as reverse_backdoor.py 
