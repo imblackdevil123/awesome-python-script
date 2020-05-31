@@ -5,14 +5,12 @@
 5.dns_spoof 
 6.writing file interceptor(replace download file)
 7.code injector
-8.bypass HTTPS
-9.arp_spoof_detector(impt to use window to run arp_spoof or any py script look this)
-
+8.bypass HTTPS          ##########################################################
+9.arp_spoof_detector(impt to use window to run arp_spoof or any py script look this)######do this when net comes and become mim from windows and test for other script too
+                        ###########################################################
 fun part 
 we are going to write malware viruses keylogger backdoor etc and etc
 writing malware=writing evil code
-12.exe_command(use to execute command on any device for which that command is acceptable by that device)
-13.report the executed command in target sending email(report_exe.py v1,v2) 
 14.dow_exe_repo.py(lezagne work most execute in window do it when wifi hits in your home)
 credential harvestor
 exploit xss vulnerability

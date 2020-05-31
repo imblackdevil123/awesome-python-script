@@ -1,0 +1,21 @@
+#backdoor when executed on sys allow us to gain full controll of that sys eg accept all command and execute remotly ,access file sys,download and upload file executed
+#creating backdoor used in many scenerio like making communication sys(chat program),making your server and controlling file remotely
+#we can also make it persistence to maintain connection even system restarts (when it boots)
+#backdoor are interactive program helps hacker use remote system as system user down,up file ,run keylogger ,open webcam executed
+#backdoor makes connection betwn two sys.hacker send sys command which run on target sys and the result send back to hacker device 
+#main challenge is to establish connection betwn system so we can send command and get result  as we can use subprocess to run sys command.socket used 
+#socket used to make connection and pass data to and from not only for backdoor for mamy application it can be used
+
+#################################
+#there are two way of connection#
+#################################
+#1.direct connection/bind connection::in this hacker going to connect from its device to target to specific portand target listening in that port 
+  #this is not the best way because for victim machine to be able to receive the connection ,backdoor have to open the specific port and when it open a port of machine having
+  #firewall, firewall will give a warning here is unknown port open by this unknowned program be careful so must sys detect throughfirewall
+#2.reverse connection::in this case when backdoor is executed on victim computer it will connect back to hacker rather than waiting(listen) for connection
+  #hacker will open port on its device and listen for incoming connection.and i can disable my firewall for giving warning for that port as it is for my own use 
+  #hence backdoor executed on victim device connect back to hacker
+  #this connection is similar to connection victim(user) does every day, when he open certain website(which runs and listen on certain port)
+  #must firewall on victim not trigger this as something suspicious especially port open in hacker is commanly known eg 80 or 8080 because it is used by web servers
+  #there is no open port listening in target so no suspicious for its firewall to trigger warning
+  
