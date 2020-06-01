@@ -19,3 +19,5 @@
   #must firewall on victim not trigger this as something suspicious especially port open in hacker is commanly known eg 80 or 8080 because it is used by web servers
   #there is no open port listening in target so no suspicious for its firewall to trigger warning
   
+
+  #for listening remote computer you need to configure your computer to receive remote connection
