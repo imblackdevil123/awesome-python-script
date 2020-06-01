@@ -6,6 +6,29 @@
 #python -m pip install pyinstaller
 #c:/cddc/efc/python.exe -m pip install pyinstaller if location not specified
 
-to convert to exe
+to convert to exe and execute silently
 #c:/location/pyinstaller.exe reverse_backdoor.py --onefile --noconsole in cmd
+#onefile to package all file used in one file and reverse_backdoor.py  should be main program which use other file as module 
+#noconsole for not showning console(blaack screen) when target run executable 
+
 #now you can see .exe file in same location as reverse_backdoor.py 
+#now test and while listening make sure you turnoff window defender or any other antivirus program because backdoor is detectable in hacker by this program while listening
+#virus evasion will be covered later 
+#two issue while running backdoor exe one is black pupup(console) appear which is already tackled .
+#when exit from listener the black prompt(console) dissapear and an error message can be seen during exit from listener
+#first issue solved now second issue is error message(warning message) appear while exiting so to solve use sys library to exit
+#using --noconsole while packaging works for all python program except that use standard input,output and error eg except that use function like check_output function
+#for those fun information in the stream are handled through console
+#so we have to manually specify what to do with the info of standard input and standard error only since std op handaled automatically by console op  
+
+
+#packge to get window executable from limux machine
+#use wine and install window py interpreter inside linux........>incomplete lookagain
+
+#make reversebackdoor or keylogger persistence use registery editor app in window to automate exe execution when system boots
+........>incomplete
+#there is one error box appear every time when backdoor try to connect the listner and listner is not listening
+#this result in problen when exe is persistence because every tine sys starts(boots) and hacker not listening the exe cannot connect and give error box and to handle use try catch in final two code
+
+
+

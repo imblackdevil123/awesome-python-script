@@ -1,0 +1,7 @@
+#we will write website information gathering tools(crawler) which will discover files,directories and subdomains
+#program that can be used to map whole website and discover all links of target website
+#we also write program that used to guess login info of any login page(extract useful part from that page)
+#website vulnearibility scanner.
+#dont test on other website use vulnerable web application that comes with metasploitable os(virtual machine)
+#metasploitable is vulnerable linux distro,it is designed for pentesters and try hack it
+
