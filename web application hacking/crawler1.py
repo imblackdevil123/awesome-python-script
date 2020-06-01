@@ -5,7 +5,7 @@ import requests
 target_url="google.com"
 def request(url):
     try:
-        return requests.get(url)#get request
+        return requests.get("http://"+ url)#get request
     except requests.exceptions.ConnectionError:
         pass
 with open("subdomains_wodlist.txt","r") as wordlist_file:

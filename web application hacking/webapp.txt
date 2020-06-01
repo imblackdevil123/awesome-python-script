@@ -5,3 +5,8 @@
 #dont test on other website use vulnerable web application that comes with metasploitable os(virtual machine)
 #metasploitable is vulnerable linux distro,it is designed for pentesters and try hack it
 
+#metasploitable download
+#rapid 7 metasploitable link,run .vmdk extension file,create(vbox),click use an existing virtual hdisk file
+#username and pass for metasploitanle is msfadmin
+#to turn off command poweroff,ifconfig get its ip and run that ip as url on kali to get website hosted on metasploitable(hack same website)
+

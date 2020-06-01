@@ -4,7 +4,7 @@
 import requests
 url="eferfwec.google.com"#go to exception for bad subdomain
 try:
-    get_response=requests.get(url)#get request
+    get_response=requests.get("http://"+ url)#get request
     print(get_response)
 except requests.exceptions.ConnectionError:
     pass
